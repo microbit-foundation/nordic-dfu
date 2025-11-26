@@ -1,6 +1,6 @@
 {
-  "name": "capacitor-community-nordic-dfu",
-  "version": "7.0.0",
+  "name": "@microbit/capacitor-community-nordic-dfu",
+  "version": "0.0.0",
   "description": "Nordic DFU OTA integration for Capacitor",
   "main": "dist/plugin.cjs.js",
   "module": "dist/esm/index.js",

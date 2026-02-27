@@ -22,4 +22,7 @@ export class NordicDfuWeb extends WebPlugin implements NordicDfuPlugin {
   ): Promise<PluginListenerHandle> & PluginListenerHandle {
     throw this.unavailable('Method not available in this browser.');
   }
+  removeBond(_options: { deviceAddress: string }): Promise<void> {
+    throw this.unavailable('Method not available in this browser.');
+  }
 }

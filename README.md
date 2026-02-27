@@ -80,6 +80,7 @@ Please check the sample permissions in [Android](./example/android/app/src/main/
 - [`requestPermissions()`](#requestpermissions)
 - [`addListener('DFUStateChanged', ...)`](#addlistenerdfustatechanged-)
 - [`removeAllListeners()`](#removealllisteners)
+- [`removeBond(...)`](#removebond)
 - [Interfaces](#interfaces)
 - [Type Aliases](#type-aliases)
 - [Enums](#enums)
@@ -166,6 +167,29 @@ removeAllListeners() => Promise<void>
 Removes all listeners for the DFUStateChanged event
 
 **Since:** 1.0.0
+
+---
+
+### removeBond(...)
+
+```typescript
+removeBond(options: { deviceAddress: string; }) => Promise<void>
+```
+
+Removes the BLE bond for the given device.
+
+On **Android**, this uses the hidden `BluetoothDevice.removeBond()` API via reflection
+(the same approach used by the Nordic DFU library).
+It waits for `ACTION_BOND_STATE_CHANGED` → `BOND_NONE` before resolving.
+
+On **iOS** and **web** this throws as bond removal is not available on
+those platforms.
+
+| Param         | Type                                    | Description                                  |
+| ------------- | --------------------------------------- | -------------------------------------------- |
+| **`options`** | <code>{ deviceAddress: string; }</code> | - The device address to remove the bond for. |
+
+**Since:** 7.0.0-microbit.5
 
 ---
 

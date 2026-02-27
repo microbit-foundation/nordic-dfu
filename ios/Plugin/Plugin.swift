@@ -373,6 +373,10 @@ public class NordicDfuPlugin: CAPPlugin, CBCentralManagerDelegate, DFUServiceDel
         }
     }
 
+    @objc func removeBond(_ call: CAPPluginCall) {
+        call.unavailable("removeBond is not available on iOS")
+    }
+
     public func logWith(_ level: LogLevel, message: String) {
         switch level {
         case .debug, .verbose:

@@ -366,6 +366,23 @@ export interface DfuOptions {
    * @since 1.0.0
    */
   unsafeExperimentalButtonlessServiceInSecureDfuEnabled?: boolean;
+
+  /**
+   * Enables or disables sending an alternative advertising name to the device before switching
+   * to DFU bootloader mode.
+   *
+   * The Nordic DFU library defaults this to `true`. When `true` and `deviceName` is provided,
+   * the library uses that name. When `true` and `deviceName` is omitted, the library generates
+   * a random name (e.g. "Dfu05017"). Set to `false` to disable entirely — the library will
+   * then scan by DFU service UUID and connect to the first matching device.
+   *
+   * **Available for iOS only.** This option is ignored on Android as the Android DFU library
+   * reconnects by MAC address instead.
+   *
+   * @default true
+   * @since 7.0.0-microbit.4
+   */
+  alternativeAdvertisingNameEnabled?: boolean;
 }
 
 /**

@@ -502,4 +502,19 @@ export interface NordicDfuPlugin {
    * @since 1.0.0
    */
   removeAllListeners(): Promise<void>;
+
+  /**
+   * Removes the BLE bond for the given device.
+   *
+   * On **Android**, this uses the hidden `BluetoothDevice.removeBond()` API via reflection
+   * (the same approach used by the Nordic DFU library).
+   * It waits for `ACTION_BOND_STATE_CHANGED` → `BOND_NONE` before resolving.
+   *
+   * On **iOS** and **web** this throws as bond removal is not available on
+   * those platforms.
+   *
+   * @param options - The device address to remove the bond for.
+   * @since 7.0.0-microbit.5
+   */
+  removeBond(options: { deviceAddress: string }): Promise<void>;
 }

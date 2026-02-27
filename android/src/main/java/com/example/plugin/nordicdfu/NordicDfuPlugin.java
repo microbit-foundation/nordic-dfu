@@ -201,6 +201,25 @@ public class NordicDfuPlugin extends Plugin {
     }
 
     @PluginMethod
+    public void removeBond(PluginCall call) {
+        String deviceAddress = call.getString("deviceAddress");
+        if (deviceAddress == null || deviceAddress.isEmpty()) {
+            call.reject("deviceAddress is required");
+            return;
+        }
+        if (!BluetoothAdapter.checkBluetoothAddress(deviceAddress)) {
+            call.reject("Invalid Bluetooth address: " + deviceAddress);
+            return;
+        }
+        try {
+            BondManager.removeBond(getContext(), deviceAddress);
+            call.resolve();
+        } catch (Exception e) {
+            call.reject("Failed to remove bond: " + e.getMessage(), e);
+        }
+    }
+
+    @PluginMethod
     public void checkPermissions(PluginCall call) {
         if (Build.VERSION.SDK_INT < Build.VERSION_CODES.TIRAMISU) {
             JSObject permissionsResultJSON = new JSObject();

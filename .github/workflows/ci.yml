@@ -88,6 +88,14 @@ jobs:
   verify-ios:
     runs-on: macos-latest
     steps:
+      - name: Select Xcode
+        run: sudo xcode-select --switch /Applications/Xcode_26.0.app
+
+      - name: Prepare simulator runtime
+        run: |
+          xcrun simctl list > /dev/null
+          xcodebuild -downloadPlatform iOS
+
       - name: Checkout
         uses: actions/checkout@v4
         with:

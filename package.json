@@ -15,8 +15,13 @@
   ],
   "author": "Robson Oliveira dos Santos",
   "license": "MIT",
+  "allowScripts": {
+    "fsevents": true,
+    "swiftlint": true
+  },
   "engines": {
-    "node": ">=20.0.0"
+    "node": ">=24.0.0",
+    "npm": ">=11.18.0"
   },
   "repository": {
     "type": "git",

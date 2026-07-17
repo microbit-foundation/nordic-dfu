@@ -19,10 +19,6 @@
     "fsevents": true,
     "swiftlint": true
   },
-  "engines": {
-    "node": ">=24.0.0",
-    "npm": ">=11.18.0"
-  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/robsonos/nordic-dfu.git"

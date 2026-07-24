@@ -18,6 +18,10 @@
   "engines": {
     "node": ">=20.0.0"
   },
+  "allowScripts": {
+    "fsevents": true,
+    "swiftlint": true
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/robsonos/nordic-dfu.git"

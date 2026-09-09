@@ -24,10 +24,10 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/robsonos/nordic-dfu.git"
+    "url": "git+https://github.com/microbit-foundation/nordic-dfu.git"
   },
   "bugs": {
-    "url": "https://github.com/robsonos/nordic-dfu/issues"
+    "url": "https://github.com/microbit-foundation/nordic-dfu/issues"
   },
   "keywords": [
     "capacitor",

@@ -235,9 +235,15 @@ public class NordicDfuPlugin: CAPPlugin, CBCentralManagerDelegate, DFUServiceDel
 
         let starter = DFUServiceInitiator().with(firmware: selectedFirmware)
 
-        if deviceName != nil {
+        let dfuOptions = call.getObject("dfuOptions")
+
+        let alternativeAdvertisingNameEnabled = dfuOptions?["alternativeAdvertisingNameEnabled"] as? Bool ?? true
+        if deviceName != nil && alternativeAdvertisingNameEnabled {
             starter.alternativeAdvertisingName = deviceName
             starter.alternativeAdvertisingNameEnabled = true
+        } else if !alternativeAdvertisingNameEnabled {
+            // Nordic DFU library defaults to true and generates random names if no name provided
+            starter.alternativeAdvertisingNameEnabled = false
         }
 
         let dfuOptions = call.getObject("dfuOptions")

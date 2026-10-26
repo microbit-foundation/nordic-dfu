@@ -380,6 +380,19 @@ export interface DfuOptions {
    * @since 8.0.0
    */
   loggingEnabled?: boolean;
+
+  /**
+   * Enables or disables sending an alternative advertising name to the device before switching
+   * to DFU bootloader mode. The library defaults this to `true`, generating a random name if
+   * `deviceName` is omitted. Set to `false` to scan by DFU service UUID instead, connecting to
+   * the first matching device.
+   *
+   * **Available for iOS only.** Android reconnects by MAC address.
+   *
+   * @default true
+   * @since 8.0.0
+   */
+  alternativeAdvertisingNameEnabled?: boolean;
 }
 
 /**

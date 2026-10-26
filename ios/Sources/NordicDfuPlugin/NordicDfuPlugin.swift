@@ -299,12 +299,19 @@ public class NordicDfuPlugin: CAPPlugin, CBCentralManagerDelegate, DFUServiceDel
 
         let starter = DFUServiceInitiator().with(firmware: selectedFirmware)
 
-        if let deviceName = deviceName {
+        let dfuOptions = call.getObject("dfuOptions")
+        let alternativeAdvertisingNameEnabled =
+            dfuOptions?["alternativeAdvertisingNameEnabled"] as? Bool ?? true
+
+        if let deviceName = deviceName, alternativeAdvertisingNameEnabled {
             starter.alternativeAdvertisingName = deviceName
             starter.alternativeAdvertisingNameEnabled = true
+        } else if !alternativeAdvertisingNameEnabled {
+            // The library defaults this to true and generates a random name if none is provided
+            starter.alternativeAdvertisingNameEnabled = false
         }
 
-        configureStarter(starter, with: call.getObject("dfuOptions"))
+        configureStarter(starter, with: dfuOptions)
 
         guard let peripheral = retrievePeripheral(for: deviceAddress) else {
             call.reject("Peripheral not found!")

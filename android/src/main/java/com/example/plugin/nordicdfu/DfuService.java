@@ -47,7 +47,7 @@ public class DfuService extends DfuBaseService {
     @Override
     protected boolean isDebug() {
         /*
-         * Use dfuOptions.loggingEnabled plugin option if you want the service to print 
+         * Use dfuOptions.loggingEnabled plugin option if you want the service to print
          * more logs in LogCat.
          */
         return loggingEnabled;

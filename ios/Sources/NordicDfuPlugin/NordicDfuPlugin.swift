@@ -2,6 +2,7 @@ import Capacitor
 import CoreBluetooth
 import Foundation
 import NordicDFU
+import os
 import UserNotifications
 
 func makePendingNotificationRequestJSObject(_ request: UNNotificationRequest) -> JSObject {
@@ -48,11 +49,12 @@ func makeNotificationRequestJSObject(
 
 @objc(NordicDfuPlugin)
 public class NordicDfuPlugin: CAPPlugin, CBCentralManagerDelegate, DFUServiceDelegate,
-                              DFUProgressDelegate, NotificationHandlerProtocol {
+                              DFUProgressDelegate, LoggerDelegate, NotificationHandlerProtocol {
     public var dfuChangeEvent: String = "DFUStateChanged"
     var notificationRequestLookup = [String: JSObject]()
     private var manager: CBCentralManager?
     private var dfuStartTime: TimeInterval?
+    private let logger = Logger(subsystem: "community.capacitor.nordic-dfu", category: "DFU")
 
     override public func load() {
         manager = CBCentralManager(delegate: self, queue: nil)
@@ -180,6 +182,19 @@ public class NordicDfuPlugin: CAPPlugin, CBCentralManagerDelegate, DFUServiceDel
         sendStateUpdate("DFU_PROGRESS", data)
     }
 
+    public func logWith(_ level: LogLevel, message: String) {
+        switch level {
+        case .debug, .verbose:
+            logger.debug("\(message, privacy: .public)")
+        case .info, .application:
+            logger.info("\(message, privacy: .public)")
+        case .warning:
+            logger.warning("\(message, privacy: .public)")
+        case .error:
+            logger.error("\(message, privacy: .public)")
+        }
+    }
+
     private func sendStateUpdate(_ state: String, _ data: JSObject = [:]) {
         let ret: JSObject = [
             "state": state,
@@ -227,6 +242,10 @@ public class NordicDfuPlugin: CAPPlugin, CBCentralManagerDelegate, DFUServiceDel
         if let unsafeButtonlessEnabled = dfuOption[
             "unsafeExperimentalButtonlessServiceInSecureDfuEnabled"] as? Bool {
             starter.enableUnsafeExperimentalButtonlessServiceInSecureDfu = unsafeButtonlessEnabled
+        }
+
+        if let loggingEnabled = dfuOption["loggingEnabled"] as? Bool, loggingEnabled {
+            starter.logger = self
         }
     }
 

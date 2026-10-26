@@ -370,6 +370,16 @@ export interface DfuOptions {
    * @since 1.0.0
    */
   unsafeExperimentalButtonlessServiceInSecureDfuEnabled?: boolean;
+
+  /**
+   * Set this flag to true to forward the Nordic DFU library's own log messages to the
+   * platform logging system. On iOS they are written to the unified log under the
+   * `community.capacitor.nordic-dfu` subsystem; on Android to LogCat.
+   *
+   * @default false
+   * @since 8.0.0
+   */
+  loggingEnabled?: boolean;
 }
 
 /**

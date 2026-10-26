@@ -242,6 +242,8 @@ public class NordicDfuPlugin: CAPPlugin, CBCentralManagerDelegate, DFUServiceDel
 
         let dfuOptions = call.getObject("dfuOptions")
 
+        let loggingEnabled = dfuOptions?["loggingEnabled"] as? Bool ?? false
+
         if let dfuOption = dfuOptions {
             // if (dfuOptions.has("disableNotification")) {
             //     starter.setDisableNotification(dfuOptions.optBoolean("disableNotification"));
@@ -327,7 +329,9 @@ public class NordicDfuPlugin: CAPPlugin, CBCentralManagerDelegate, DFUServiceDel
         let peripheral = peripherals[0]
         starter.delegate = self
         starter.progressDelegate = self
-        starter.logger = self
+        if loggingEnabled {
+            starter.logger = self
+        }
         _ = starter.start(target: peripheral)
 
         call.resolve()

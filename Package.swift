@@ -2,11 +2,11 @@
 import PackageDescription
 
 let package = Package(
-    name: "NordicDfu",
+    name: "MicrobitCapacitorCommunityNordicDfu",
     platforms: [.iOS(.v15)],
     products: [
         .library(
-            name: "NordicDfu",
+            name: "MicrobitCapacitorCommunityNordicDfu",
             targets: ["NordicDfuPlugin"])
     ],
     dependencies: [

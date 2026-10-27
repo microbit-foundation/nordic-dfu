@@ -372,6 +372,15 @@ export interface DfuOptions {
   unsafeExperimentalButtonlessServiceInSecureDfuEnabled?: boolean;
 
   /**
+   * Set this flag to true to forward the Nordic DFU library's own log messages to the
+   * platform logging system.
+   *
+   * @default false
+   * @since 8.0.0
+   */
+  loggingEnabled?: boolean;
+
+  /**
    * Enables or disables sending an alternative advertising name to the device before switching
    * to DFU bootloader mode.
    *

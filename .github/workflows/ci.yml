@@ -134,7 +134,7 @@ jobs:
         run: npm run verify:ios
 
   release:
-    if: github.event_name == 'release'
+    # if: github.event_name == 'release'
     runs-on: ubuntu-latest
     permissions:
       contents: read
@@ -170,7 +170,7 @@ jobs:
 
   publish:
     needs: release
-    if: github.event_name == 'release'
+    # if: github.event_name == 'release'
     runs-on: ubuntu-latest
     environment: npm-publish
     permissions:

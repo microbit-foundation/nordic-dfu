@@ -47,8 +47,15 @@ func makeNotificationRequestJSObject(
 }
 
 @objc(NordicDfuPlugin)
-public class NordicDfuPlugin: CAPPlugin, CBCentralManagerDelegate, DFUServiceDelegate,
+public class NordicDfuPlugin: CAPPlugin, CAPBridgedPlugin, CBCentralManagerDelegate, DFUServiceDelegate,
                               DFUProgressDelegate, NotificationHandlerProtocol {
+    public let identifier = "NordicDfuPlugin"
+    public let jsName = "NordicDfu"
+    public let pluginMethods: [CAPPluginMethod] = [
+        CAPPluginMethod(name: "startDFU", returnType: CAPPluginReturnPromise),
+        CAPPluginMethod(name: "checkPermissions", returnType: CAPPluginReturnPromise),
+        CAPPluginMethod(name: "requestPermissions", returnType: CAPPluginReturnPromise)
+    ]
     public var dfuChangeEvent: String = "DFUStateChanged"
     var notificationRequestLookup = [String: JSObject]()
     private var manager: CBCentralManager?

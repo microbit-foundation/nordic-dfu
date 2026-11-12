@@ -252,6 +252,7 @@ Contains data related to the DFU update process, such as progress and speed.
 | **`partsTotal`**    | <code>number</code> | The total number of parts.                                                                                                                                                                                                    | 1.0.0 |
 | **`duration`**      | <code>number</code> | The total time elapsed since the start of the DFU process in milliseconds                                                                                                                                                     | 1.1.0 |
 | **`remainingTime`** | <code>number</code> | The estimated remaining time to the end of the DFU process in milliseconds                                                                                                                                                    | 1.1.0 |
+| **`message`**       | <code>string</code> | A description of the error from the native DFU library. Only set for the `DFU_FAILED` state.                                                                                                                                  | 7.2.0 |
 
 ### Type Aliases
 

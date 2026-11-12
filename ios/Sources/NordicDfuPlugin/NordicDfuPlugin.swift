@@ -151,10 +151,10 @@ public class NordicDfuPlugin: CAPPlugin, CAPBridgedPlugin, CBCentralManagerDeleg
         }
     }
 
-    public func dfuError(_: DFUError, didOccurWithMessage _: String) {
+    public func dfuError(_: DFUError, didOccurWithMessage message: String) {
         // Reset dfuStartTime if an error occurs
         dfuStartTime = nil
-        sendStateUpdate("DFU_FAILED")
+        sendStateUpdate("DFU_FAILED", ["message": message])
     }
 
     public func dfuProgressDidChange(

@@ -162,6 +162,13 @@ export interface DfuUpdateData {
    * @since 1.1.0
    */
   remainingTime?: number;
+
+  /**
+   * A description of the error from the native DFU library. Only set for the `DFU_FAILED` state.
+   *
+   * @since 7.2.0
+   */
+  message?: string;
 }
 
 /**
